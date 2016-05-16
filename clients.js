@@ -39,4 +39,14 @@ Clients.prototype.getUniqueNickname = function(){
   return tempName;
 };
 
+Clients.prototype.changeNickname = function(user){
+  var newName = this.getUniqueNickname();
+  var message = `I have changed my nickname to ${newName} \n`;
+  this.broadcastMessage(user, message);
+  // Update the list of sockets
+  this.sockets[newName] = this.sockets[user];
+  delete this.sockets[user];
+  return newName;
+};
+
 module.exports = Clients;

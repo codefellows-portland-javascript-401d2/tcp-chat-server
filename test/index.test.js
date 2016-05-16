@@ -18,7 +18,7 @@ describe('Clients module', () =>{
     assert.isOk(clients.sockets[testUser]);
   });
 
-  it('removes a client from the client list', () =>{
+  it('removes a socket from the socket list', () =>{
     clients.endSession(testUser);
     assert.isNotOk(clients.sockets.testUser);
   });
@@ -26,6 +26,11 @@ describe('Clients module', () =>{
   it('generates a nickname', done =>{
     assert.isOk(clients.getUniqueNickname());
     done();
+  });
+
+  it('returns a new and different nickname', () =>{
+    var newName = clients.changeNickname(testUser);
+    assert.notEqual(newName, testUser);
   });
 
 });
