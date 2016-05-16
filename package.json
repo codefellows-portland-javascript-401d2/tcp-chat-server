@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/jluangphasy/tcp-chat-server#readme",
   "dependencies": {
-    "dog-names": "^1.0.2"
+    "superheroes": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^2.4.5"

@@ -1,18 +1,24 @@
 const net = require('net');
-const dogNames = require('dog-names');
+const superheroes = require('superheroes');
 
 const server = net.createServer(socket => {
-  const name = dogNames.allRandom();
+  const name = superheroes.random();
 
-  console.log(`${name} has joined the building.`);
+  console.log(`${name} joined our team.`);
+
+  socket.on('data', chunkData => {
+    console.log(`${name}: ${chunkData.toString()}`);
+  });
 
   socket.on('close', () => {
-    console.log(`${name} has left the building.`);
+    console.log(`${name} left our team.`);
   });
+
+  // socket.pipe(process.stdout);
 });
 
 server.listen(() => {
   let address = server.address();
 
-  console.log(`Opened server on http:localhost:${address.port}`);
+  console.log(`Superheroes at port ${address.port} on localhost (http://localhost:${address.port}).`);
 });
