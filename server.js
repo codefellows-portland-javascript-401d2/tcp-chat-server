@@ -11,19 +11,22 @@ var server = net.createServer((socket) => {
   guests.push(socket); // Adds this client to global array GUESTS
   
   // Server logs
-  console.log(`${name} connected at ${socket.remoteAddress}:${socket.port}`);
-  console.log('guests:', guests);
+  console.log(`${name} connected at ${socket.remoteAddress}`);
+  console.log('guests:', guests.length);
   socket.on('close', () => {
     console.log(`${name} disconnected...`);
+    guests.splice(guests.indexOf(socket), 1);
+    console.log('guests:', guests.length);
+    writeAll(null, `${name} has left the chat room`);
   });
   
-  socket.write(`${name}:`);
+  writeAll(null, `Welcome to the chat room ${name}\r\n`);
 
   socket.on('data', chunk => {
     body += chunk; // accumulate buffer input to body- auto converts to string
     if (chunk.toString('hex') == '0d0a') { // If return comes through...
       writeAll(socket, `\r\n${name}: ${body}\r\n`); // write to everyone ELSE- return, body, return
-      socket.write(`\r\n${name}:`); // write to this sender- return, name: 
+      // socket.write(`\r\n${name}:`); // write to this sender- return, name: 
       body = ''; // clear body variable
     }
     
