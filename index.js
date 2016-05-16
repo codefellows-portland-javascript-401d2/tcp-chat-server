@@ -4,7 +4,7 @@ var fs = require('fs');
 const log = fs.createWriteStream('chat-log.txt');
 
 var clients = [];
-var userNames = []; //used to display other users online
+var onlineUsers = []; //used to display other users online
 
 
 const server = net.createServer((socket) => {
@@ -22,16 +22,19 @@ const server = net.createServer((socket) => {
   //write to client upon connecting
   socket.write(`May the force be with you, ${socket.name}!\n` );
 
-  if(userNames.length > 0){
-    socket.write(userNames.join(', ') + ' are also online.\n');
+  if(onlineUsers.length > 0){
+    socket.write(onlineUsers.join(', ') + ' are also online.\n');
   } else {
     socket.write('you are the only user online');
   }
 
-  userNames.push(socket.name);
+  //adds current user to those online
+  onlineUsers.push(socket.name);
 
-  //on client message
+  //on new client input
   socket.on('data', (chunk) =>{
+
+    //outputs message to all clients
     clients.forEach((user) =>{
       if(userName === user.name){
         user.write(`me: ${chunk.toString()}\n`);
