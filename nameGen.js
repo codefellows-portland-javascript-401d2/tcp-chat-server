@@ -1,5 +1,5 @@
 module.exports = function() {
-  const suffix = Math.ceil(Math.random().toFixed(2) * 100); // Random 1 - 100
+  const suffix = Math.ceil(Math.random().toFixed(2) * 1000); // Random 1 - 1000
   return `Guest-${suffix}`;
 };
 

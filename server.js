@@ -5,33 +5,30 @@ const guests = [];
 
 var server = net.createServer((socket) => {
   
-  var name = nameGen();  // randomly generates name (NOT UNIQUE yet)
+  var name = nameGen();  // randomly generates name
   var body = '';
   
   guests.push(socket); // Adds this client to global array GUESTS
   
-  // Server logs
+  // Guest handlers
+  writeAll(null, `Welcome to the chat room ${name}\r\n`);
   console.log(`${name} connected at ${socket.remoteAddress}`);
   console.log('guests:', guests.length);
+  
   socket.on('close', () => {
     console.log(`${name} disconnected...`);
-    guests.splice(guests.indexOf(socket), 1);
+    guests.splice(guests.indexOf(socket), 1); // removes this client from guests[]
     console.log('guests:', guests.length);
     writeAll(null, `${name} has left the chat room`);
   });
   
-  writeAll(null, `Welcome to the chat room ${name}\r\n`);
-
-  socket.on('data', chunk => {
-    body += chunk; // accumulate buffer input to body- auto converts to string
+  socket.on('data', (chunk) => {
+    body += chunk;
     if (chunk.toString('hex') == '0d0a') { // If return comes through...
-      writeAll(socket, `\r\n${name}: ${body}\r\n`); // write to everyone ELSE- return, body, return
-      // socket.write(`\r\n${name}:`); // write to this sender- return, name: 
-      body = ''; // clear body variable
+      writeAll(socket, `${name}: ${body}`); // write to everyone     
+      body = ''; 
     }
-    
   });
-  
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -43,13 +40,12 @@ server.listen(port, () => {
   console.log('opened server on %j', address);
 });
 
-
 function writeAll(sender, message) {
   guests.forEach(guest => {
     if (guest === sender) {
-      return;
+      guest.write(`\r\n(You)${message}`); // prints (You) with message for sender
     } else {
-      guest.write(message);
+      guest.write(`\r\n${message}`);
     }
   });
 }
