@@ -1,23 +1,22 @@
 var net = require('net');
 var fs = require('fs');
 
+
 const log = fs.createWriteStream('chat-log.txt');
 
 var clients = [];
 var onlineUsers = []; //used to display other users online
-
 
 const server = net.createServer((socket) => {
   //assigns random number to socket.name
   socket.name = 'jedi-' + Math.floor(Math.random() * 10000);
 
   var userName = socket.name;
+
   //adds socket.name to array of online clients
   clients.push(socket);
 
-
-  //outputs to server
-  console.log(`${socket.name} connected`);
+  broadcast(socket.name, 'has joined.');
 
   //write to client upon connecting
   socket.write(`May the force be with you, ${socket.name}!\n` );
@@ -25,23 +24,16 @@ const server = net.createServer((socket) => {
   if(onlineUsers.length > 0){
     socket.write(onlineUsers.join(', ') + ' are also online.\n');
   } else {
-    socket.write('you are the only user online');
+    socket.write('you are the only user online\n');
   }
 
   //adds current user to those online
   onlineUsers.push(socket.name);
 
-  //on new client input
+
   socket.on('data', (chunk) =>{
 
-    //outputs message to all clients
-    clients.forEach((user) =>{
-      if(userName === user.name){
-        user.write(`me: ${chunk.toString()}\n`);
-      } else {
-        user.write(`${userName}: ${chunk.toString()}\n`);
-      }
-    });
+    broadcast(`${userName}: `, chunk);
 
     //output to log file
     log.write(`${socket.name}: ${chunk.toString()}\n`);
@@ -49,19 +41,24 @@ const server = net.createServer((socket) => {
 
   //on disconnect, notes disconnect and user name on server, removes departing client from client array
   socket.on('close', () =>{
-    console.log(`${socket.name} disconnected`);
     var index = clients.indexOf(socket.name);
     //removes departing clients
     clients.splice(index, 1);
+
+    broadcast(socket.name, 'has disconnected.');
   });
-
-
-  //pipes socket output to console
-  socket.pipe(process.stdout);
 });
 
+var broadcast = function(currentUser, message){
+  clients.forEach((user) =>{
+    if(currentUser !== `${user.name}: `){
+      user.write(`${currentUser} ${message.toString()}\n`);
+    }
+  });
+  console.log(`${currentUser} ${message.toString()}\n`);
+};
 
-//TODO managing clients should be separate from server creation logic
+//TODO refactor to manage clients separately from server creation logic
 
 //DONE create broadcast functionality
 //DONE remove a user from clients array on disconnect
