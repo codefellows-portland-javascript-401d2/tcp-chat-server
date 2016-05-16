@@ -29,8 +29,6 @@ describe('Clients module', () =>{
   });
 
   it('adds a new socket to the list of sockets', () => {
-    console.log(testSocket);
-
     clients.newClient(testUser, testSocket);
     assert.isOk(clients.sockets[testUser]);
   });
