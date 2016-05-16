@@ -1,0 +1,22 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "![CF](http://i.imgur.com/7v5ASc8.png) TCP Chat Server ===",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/araedavis/tcp-chat-server.git"
+  },
+  "author": "allison davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/araedavis/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/araedavis/tcp-chat-server#readme",
+  "devDependencies": {
+    "eslint": "^2.10.1"
+  }
+}
