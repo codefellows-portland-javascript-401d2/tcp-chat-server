@@ -19,6 +19,9 @@
     "url": "https://github.com/jluangphasy/tcp-chat-server/issues"
   },
   "homepage": "https://github.com/jluangphasy/tcp-chat-server#readme",
+  "dependencies": {
+    "dog-names": "^1.0.2"
+  },
   "devDependencies": {
     "mocha": "^2.4.5"
   }
