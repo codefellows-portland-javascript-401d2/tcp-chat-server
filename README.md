@@ -1,5 +1,7 @@
-*TCP Chat Server
+##TCP Chat Server
 
-A server to using for chatting with friends.
-When connecting, users are issued a nickname "friend-[random number]" and welcome message.
-Users are informed when a friend joins or leaves the chat.
+A simple TCP server for chatting with friends.
+
+Upon connecting, users are issued a nickname "friend-[random number]" and a welcome message.
+
+Users are informed when a friend joins or leaves the chat channel.
