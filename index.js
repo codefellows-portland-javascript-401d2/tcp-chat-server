@@ -3,31 +3,32 @@ var fs = require('fs');
 
 const log = fs.createWriteStream('chat-log.txt');
 
-// const chat = fs.createWriteStream();
-
 var clients = [];
+var userNames = [];
 
 
 const server = net.createServer((socket) => {
   //assigns random number to socket.name
   socket.name = 'jedi-' + Math.floor(Math.random() * 10000);
 
+  var userName = socket.name;
   //adds socket.name to array of online clients
-  clients.push(socket.name);
+  clients.push(socket);
+  userNames.push(socket.name);
 
   //outputs to server
   console.log(`${socket.name} connected`);
 
   //outputs to client when they join
   socket.write(`May the force be with you, ${socket.name}!\n` );
-  socket.write(clients.join(', ') + ' are currently online.\n');
+  socket.write(userNames.join(', ') + ' are currently online.\n');
 
 
   //on client message
   socket.on('data', (chunk) =>{
-
-    //broadcast to all chat users
-    // broadcast(chunk);
+    clients.forEach((user) =>{
+      user.write(`${userName}: ${chunk.toString()}\n`);
+    });
 
     //output to log file
     log.write(`${socket.name}: ${chunk.toString()}\n`);
@@ -41,11 +42,6 @@ const server = net.createServer((socket) => {
     clients.splice(index, 1);
   });
 
-  function broadcast(message){
-    clients.forEach(() => {
-      chat.write(message);
-    });
-  }
 
   //pipes socket output to console
   socket.pipe(process.stdout);
