@@ -8,10 +8,6 @@ const server = net.createServer( socket => {
   //identifying each client
   socket.name = randomName();
 
-  // socket.name = socket.remoteAddress + ':' + socket.remotePort;
-  // var userName = socket.name;
-  // var userName = randomName();
-
   //pushing client into the array
   clients.push(socket);
 
@@ -39,7 +35,7 @@ const server = net.createServer( socket => {
 
   //creating random user name
 
-  var randomName = function() {
+  function randomName() {
 
     var animals = ['pigeon', 'seagull', 'bat', 'owl', 'sparrow', 'hawk', 'fish', 'frog', 'whale', 'shark', 'octopus', 'rabbit', 'chipmunk', 'dog', 'cat', 'lynx', 'mouse', 'lion', 'moose', 'horse', 'deer', 'raccoon', 'zebra', 'goat', 'cow', 'pig', 'tiger', 'wolf', 'pony', 'antelope', 'buffalo', 'camel', 'donkey', 'elk', 'fox', 'monkey', 'gazelle', 'jaguar', 'leopard', 'lemur', 'yak', 'elephant', 'giraffe', 'hippopotamus', 'rhinoceros', 'grizzlybear'];
     var colors = ['silver', 'gray', 'black', 'red', 'maroon', 'olive', 'lime', 'green', 'teal', 'blue', 'navy', 'fuchsia', 'purple'];
@@ -48,6 +44,6 @@ const server = net.createServer( socket => {
 
 });
 
-server.listen( 6500, () => {
-  console.log('Server has been opened on Port 6500');
+server.listen( 65000, () => {
+  console.log('Server has been opened on Port 65000');
 });
