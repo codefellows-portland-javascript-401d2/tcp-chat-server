@@ -1,20 +1,23 @@
 const net = require('net');
 
-// Function returns a random nick name
-// When receives data, broadcasts it to all clients (sockets)
-
 function nickName(){
-  return 'friend' + Math.floor(Math.random()*100);
+  return 'friend-' + Math.floor(Math.random()*100);
 }
 
-var mySockets = [];
+var mySockets = Object.create(null);
 
-function broadcast(user, data){
-  for (var i=0; i<mySockets.length; i++) {
-    mySockets[i].socket.write(user + ' says: ' + data);
+function broadcastMessage(user, data){
+  for (var property in mySockets){
+    mySockets[property].write(user + ' says: ' + data);
   }
 }
 
+function endSession(user){
+  delete mySockets[user];
+  for (var property in mySockets){
+    mySockets[property].write(user + ' has ended their chat session. \n');
+  }
+}
 
 const server = net.createServer( socket => {
 
@@ -25,13 +28,16 @@ const server = net.createServer( socket => {
   nameObject.nickname = thisUser;
   nameObject.socket = socket;
 
-  mySockets.push(nameObject);
-  console.log(mySockets);
+  mySockets[thisUser] = socket;
+  // mySockets.push(nameObject);
+  console.log(Object.keys(mySockets));
 
   socket.on('data', chunk => {
-    console.log(`received chunk ${chunk}`);
+    broadcastMessage(thisUser, chunk);
+  });
 
-    broadcast(thisUser, chunk);
+  socket.on('end', () => {
+    endSession(thisUser);
   });
 
   // Initial greeting to a new user
@@ -39,7 +45,6 @@ const server = net.createServer( socket => {
 
 });
 server.listen(65000, () => {
-  console.log('tcp listening');
 });
 
 function mainMethod(){
