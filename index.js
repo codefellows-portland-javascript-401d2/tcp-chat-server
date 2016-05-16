@@ -4,7 +4,7 @@ var fs = require('fs');
 const log = fs.createWriteStream('chat-log.txt');
 
 var clients = [];
-var userNames = [];
+var userNames = []; //used to display other users online
 
 
 const server = net.createServer((socket) => {
@@ -14,20 +14,30 @@ const server = net.createServer((socket) => {
   var userName = socket.name;
   //adds socket.name to array of online clients
   clients.push(socket);
-  userNames.push(socket.name);
+
 
   //outputs to server
   console.log(`${socket.name} connected`);
 
-  //outputs to client when they join
+  //write to client upon connecting
   socket.write(`May the force be with you, ${socket.name}!\n` );
-  socket.write(userNames.join(', ') + ' are currently online.\n');
 
+  if(userNames.length > 0){
+    socket.write(userNames.join(', ') + ' are also online.\n');
+  } else {
+    socket.write('you are the only user online');
+  }
+
+  userNames.push(socket.name);
 
   //on client message
   socket.on('data', (chunk) =>{
     clients.forEach((user) =>{
-      user.write(`${userName}: ${chunk.toString()}\n`);
+      if(userName === user.name){
+        user.write(`me: ${chunk.toString()}\n`);
+      } else {
+        user.write(`${userName}: ${chunk.toString()}\n`);
+      }
     });
 
     //output to log file
@@ -50,7 +60,7 @@ const server = net.createServer((socket) => {
 
 //TODO managing clients should be separate from server creation logic
 
-//TODO create broadcast function
+//DONE create broadcast functionality
 //DONE remove a user from clients array on disconnect
 
 server.listen(8000, () =>{
