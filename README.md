@@ -1,10 +1,7 @@
-![CF](http://i.imgur.com/7v5ASc8.png) TCP Chat Server
-===
+### tcp-chat-server
 
-* Lab instructions are [here](LAB.md)
+-Chat server written on TCP. Chatlog writes to chat-log.txt.
 
-* Lab Part 2 instructions are [here](LAB-Part2.md)
+-Client numbers randomly assigned at login.
 
-* Add your own `.eslintrc`, edit/replace `.*ignore` files as needed
-
-* Replace this README.md with your own!
+-Run server with `node index.js`; clients can be tested using `telnet`.
