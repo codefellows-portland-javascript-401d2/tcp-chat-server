@@ -1,0 +1,25 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "TCP chat server built on Node.js",
+  "main": "chat.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katesowles/tcp-chat-server.git"
+  },
+  "author": "Kate Sowles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/katesowles/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/katesowles/tcp-chat-server#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.10.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0"
+  }
+}
