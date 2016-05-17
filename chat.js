@@ -5,8 +5,6 @@ const random = require('./random');
 
 chat.portNum = 6500;
 chat.sockets = [];
-chat.users = [];
-chat.id = 1;
 
 chat.server = net.createServer(socket => {
 
@@ -14,23 +12,22 @@ chat.server = net.createServer(socket => {
   var username = socket.username;
 
   chat.sockets.push(socket);
-  chat.users.push(username);
 
   socket.write(`welcome ${username}\n`);
 
-  broadcast(username, `${username} joined this chat.\n`);
+  chat.broadcast(username, `${username} joined this chat.\n`);
 
   socket.on('data', data => {
     var message = `${username}: ${data.toString()}`;
-    broadcast(username, message);
+    chat.broadcast(username, message);
     process.stdout.write(message);
   });
 
   socket.on('end', () => {
     var message = `${username} left this chat \n`;
+    chat.remove(username);
     process.stdout.write(message);
-    remove(username);
-    broadcast(username, message);
+    chat.broadcast(username, message);
   });
 
   socket.on('error', error => {
@@ -38,11 +35,11 @@ chat.server = net.createServer(socket => {
   });
 });
 
-var remove = function(socket) {
+chat.remove = function(socket) {
   chat.sockets.splice(chat.sockets.indexOf(socket.username), 1);
 };
 
-var broadcast = function (from, message) {
+chat.broadcast = function (from, message) {
   if (chat.sockets.length === 0) {
     process.stdout.write('everyone left the chat');
     return;

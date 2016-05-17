@@ -2,9 +2,9 @@
   "name": "tcp-chat-server",
   "version": "1.0.0",
   "description": "TCP chat server built on Node.js",
-  "main": "chat.js",
+  "main": "index.js",
   "scripts": {
-    "test": "gulp lint"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
