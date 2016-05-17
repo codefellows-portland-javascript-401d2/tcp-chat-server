@@ -12,7 +12,7 @@ gulp.task('lint', () => {
 });
 
 gulp.task('run-tests', () => {
-  return gulp.src('./test/**/*.js', {read: false})
+  return gulp.src('./test/**/*.js', {read: false});
   // .pipe(mocha());
 });
 
