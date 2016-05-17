@@ -18,14 +18,10 @@ Clients.prototype.endSession = function (user){
 Clients.prototype.newClient = function (user, socket){
   // Anouncement to everyone else that new client is on
   for (var property in this.sockets){
-    if (socket.writable){
-      this.sockets[property].write(user + ' has joined the chat!\n');
-    }
+    this.sockets[property].write(user + ' has joined the chat!\n');
   }
   // Greeting to the new user
-  if (socket.writable){
-    socket.write('Welcome, you are: ' + user + '\n');
-  }
+  socket.write('Welcome, you are: ' + user + '\n');
   // Add to client list
   this.sockets[user] = socket;
 };
