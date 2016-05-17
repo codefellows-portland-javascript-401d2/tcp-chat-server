@@ -1,10 +1,18 @@
-![CF](http://i.imgur.com/7v5ASc8.png) TCP Chat Server
-===
+# ![CF](http://i.imgur.com/7v5ASc8.png) TCP Chat Server
 
-* Lab instructions are [here](LAB.md)
+A chat server that manages connecting clients and enables broadcasting of messages.
 
-* Lab Part 2 instructions are [here](LAB-Part2.md)
+## Getting Started
 
-* Add your own `.eslintrc`, edit/replace `.*ignore` files as needed
+1. Install [Node.js](https://nodejs.org/en/)
+2. Run `git clone https://github.com/jluangphasy/tcp-chat-server.git`
+3. Run `git checkout jluangphasy`
+4. Run `npm install`
 
-* Replace this README.md with your own!
+Default port number is `65000`. If you want to use a different port, replace `[port]` with whatever port you want.
+
+To run server: `node index.js` or `node index.js [port]`.
+
+In a new terminal window, run `telnet localhost [port]` to connect a new client/user to the chat server.
+
+To run test: `npm run test`.
