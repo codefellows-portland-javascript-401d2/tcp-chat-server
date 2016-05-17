@@ -4,7 +4,7 @@
   "description": "TCP chat server built on Node.js",
   "main": "chat.js",
   "scripts": {
-    "test": "test"
+    "test": "gulp lint"
   },
   "repository": {
     "type": "git",
