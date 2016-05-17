@@ -1,11 +1,11 @@
 var net = require('net');
 var fs = require('fs');
-
-
-const log = fs.createWriteStream('chat-log.txt');
+//var chat = require('./chat');
 
 var clients = [];
 var onlineUsers = []; //used to display other users online
+
+const log = fs.createWriteStream('chat-log.txt');
 
 const server = net.createServer((socket) => {
   //assigns random number to socket.name
@@ -13,7 +13,7 @@ const server = net.createServer((socket) => {
 
   var userName = socket.name;
 
-  broadcast(socket.name, 'has joined.');
+  broadcast(socket.name, 'has joined.\n');
   clients.push(socket);
 
   //welcome message to new client
@@ -26,7 +26,6 @@ const server = net.createServer((socket) => {
 
   //adds new client to those online
   onlineUsers.push(socket.name);
-
 
   //event emitter for new socket data
   socket.on('data', (chunk) =>{
@@ -50,16 +49,12 @@ var newHandle = function(){
 var broadcast = function(currentUser, message){
   clients.forEach((user) =>{
     if(currentUser !== `${user.name}: `){
-      user.write(`${currentUser} ${message.toString()}\n`);
+      user.write(`${currentUser} ${message.toString()}`);
     }
   });
-  console.log(`${currentUser} ${message.toString()}\n`);
-  log.write(`${currentUser} ${message.toString()}\n`);
+  console.log(`${currentUser} ${message.toString()}`);
+  log.write(`${currentUser} ${message.toString()}`);
 };
-
-// var requestNewHandle = function(currentUser){
-//
-// };
 
 server.listen(8000, () =>{
   console.log('server listening at %j', server.address());
