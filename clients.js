@@ -11,7 +11,7 @@ Clients.prototype.broadcastMessage = function (user, data){
 Clients.prototype.endSession = function (user){
   delete this.sockets[user];
   for (var property in this.sockets){
-    this.sockets[property].write(user + ' has ended their chat session. \n');
+    this.sockets[property].write(user + ' has ended their chat session.\n');
   }
 };
 
@@ -19,7 +19,7 @@ Clients.prototype.newClient = function (user, socket){
   // Anouncement to everyone else that new client is on
   for (var property in this.sockets){
     if (socket.writable){
-      this.sockets[property].write(user + ' has joined the chat! \n');
+      this.sockets[property].write(user + ' has joined the chat!\n');
     }
   }
   // Greeting to the new user

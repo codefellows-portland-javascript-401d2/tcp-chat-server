@@ -23,4 +23,6 @@ const server = net.createServer( socket => {
   });
 });
 
-server.listen(65000);
+module.exports = server;
+
+// server.listen(65000);
