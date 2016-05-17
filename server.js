@@ -9,7 +9,6 @@ const server = net.createServer( socket => {
   socket.name = randomName();
 
   //pushing client into the array
-  clients.push(socket);
 
   //function tellAll that broadcasts messages to everybody
   function tellAll(message, sender) {
@@ -19,9 +18,11 @@ const server = net.createServer( socket => {
   }
 
   //Welcome new client and announce arrival to everybody
-  socket.write('Welcome to the chat, ' + socket.name + '\n');
+  socket.write('Welcome to the chat');
   tellAll(socket.name + ' has joined the chat. Say hello!\n', socket);
 
+  clients.push(socket);
+  
   //broadcast client message to everybody
   socket.on('data', function (data) {
     tellAll(socket.name + ': ' + data, socket);
@@ -43,3 +44,5 @@ const server = net.createServer( socket => {
   };
 
 });
+
+module.exports = server;
