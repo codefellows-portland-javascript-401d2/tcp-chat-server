@@ -1,0 +1,29 @@
+{
+  "name": "tcp-chat",
+  "version": "1.0.0",
+  "description": "Chat server application built with TCP server",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DonChatelain/tcp-chat-server.git"
+  },
+  "author": "Don Chatelain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DonChatelain/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/DonChatelain/tcp-chat-server#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.10.2",
+    "mocha": "^2.4.5",
+    "nodemon": "^1.9.2"
+  }
+}
