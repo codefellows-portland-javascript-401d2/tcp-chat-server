@@ -1,10 +1,9 @@
-![CF](http://i.imgur.com/7v5ASc8.png) TCP Chat Server
-===
+##TCP Chat Server
 
-* Lab instructions are [here](LAB.md)
+A simple TCP server for chatting with friends.
 
-* Lab Part 2 instructions are [here](LAB-Part2.md)
+Upon connecting, users are issued a nickname "friend-[random number]" and a welcome message.
 
-* Add your own `.eslintrc`, edit/replace `.*ignore` files as needed
+Users are informed when a friend joins or leaves the chat channel.
 
-* Replace this README.md with your own!
+Change your randomly genereted name by entering "/nick new-name"
