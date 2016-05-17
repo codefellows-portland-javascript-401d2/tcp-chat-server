@@ -4,7 +4,7 @@
   "description": "Chat server application built with TCP server",
   "main": "index.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
     "test": "mocha",
