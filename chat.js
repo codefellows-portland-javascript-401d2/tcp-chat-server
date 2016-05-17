@@ -31,7 +31,5 @@ exports.onClientDisconnect = function(allClients, client){
     var index = allClients.indexOf(client.name);
     //removes departing clients
     allClients.splice(index, 1);
-
-    broadcast(client.name, 'has disconnected.');
   });
 };

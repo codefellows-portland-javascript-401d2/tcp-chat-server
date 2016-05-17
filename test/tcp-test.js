@@ -23,10 +23,17 @@ describe('tcp chat server', () =>{
       done();
     });
 
-    it('', done =>{
+    it('broadcasts message to all clients', done =>{
+      client.once('data', message =>{
+        assert.equal(message, 'hello!');
+      });
       done();
     });
 
+    after( done => {
+      client.on( 'close', done );
+      client.end();
+    });
   });
 
 });

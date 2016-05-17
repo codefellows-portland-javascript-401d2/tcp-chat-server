@@ -27,6 +27,7 @@ const server = net.createServer((socket) => {
 
   //on socket disconnect
   chat.onClientDisconnect(clients, socket);
+  chat.broadcast(clients, socket.name, 'has disconnected.');
 });
 
 module.exports = server;
