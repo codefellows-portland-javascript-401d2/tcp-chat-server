@@ -16,7 +16,10 @@ var server = net.createServer((socket) => {
   
   socket.on('close', () => {
     console.log(`${name} disconnected...`);
-    guestList.guests.splice(guestList.guests.indexOf(socket), 1); // removes this client from guests[]
+    const index = guestList.guests.indexOf(socket);
+    if (index !== -1) {
+      guestList.guests.splice(index, 1); // removes this client from guests[]
+    }
     console.log('guests:', guestList.guests.length);
     guestList.writeAll(null, `${name} has left the chat room`);
   });
