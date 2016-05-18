@@ -7,9 +7,7 @@ chat.allSockets = [];
 
 chat.broadcastSockets = (socket, content) => {
   chat.allSockets.forEach((currentSocket) => {
-    if (currentSocket.superhero !== socket.superhero) {
-      currentSocket.write(content);
-    }
+    currentSocket.write(content);
   });
 };
 
@@ -25,8 +23,6 @@ chat.newServer = () => {
       let chunkStr = chunkData.toString().trim();
 
       chat.broadcastSockets(socket, `${socket.superhero}: ${chunkStr}\n`);
-
-      socket.write(`${socket.superhero}: `);
     });
 
     socket.on('close', () => {
