@@ -10,26 +10,41 @@ describe( 'testing all the things', () => {
     server.listen( port, done );
   });
 
-  var client;
+  var client1;
+  var client2;
 
   before( done => {
-    client = net.connect( { port }, done );
+    client1 = net.connect( { port }, done );
   });
 
   it ( 'says hello to new client on connection', done => {
-    client.once( 'data', message => {
+    client1.once( 'data', message => {
       assert.equal( message.toString(), 'Welcome to the chat');
       done();
     });
   });
 
   it( 'echos client', done => {
-    client.once( 'data', message => {
+    client1.once( 'data', message => {
       assert.equal( message.toString(), 'Hi there!' );
       done();
     });
 
-    client.write( 'Hi there!' );
+    client1.write( 'Hi there!' );
+  });
+
+  before(done => {
+    client2 = net.connect({port},done);
+  });
+
+  var testMessage = 'Hello from one client to another';
+  it( 'message from one client shows up for another', done => {
+    client1.once('data', message => {
+      var incomingMessage = message;
+      assert.equal(testMessage, incomingMessage);
+      done();
+    });
+    client2.write(testMessage);
   });
 
 });
