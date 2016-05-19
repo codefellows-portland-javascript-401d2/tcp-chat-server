@@ -27,9 +27,7 @@ exports.newClientWelcome = function(otherClients, client){
 };
 
 exports.onClientDisconnect = function(allClients, client){
-  client.on('close', () =>{
-    var index = allClients.indexOf(client.name);
-    //removes departing clients
-    allClients.splice(index, 1);
-  });
+  var index = allClients.indexOf(client.name);
+  //removes departing clients
+  allClients.splice(index, 1);
 };
