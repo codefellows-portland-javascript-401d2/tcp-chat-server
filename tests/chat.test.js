@@ -85,15 +85,13 @@ describe('superheroes tcp chat server', () => {
 
       client1.once('data', (inputMessage) => {
         inputMessage = inputMessage.toString();
-
         expect(inputMessage).to.equal(outputMessage);
-        done();
-
       });
 
       client2.once('data', (inputMessage) => {
         inputMessage = inputMessage.toString();
         expect(inputMessage).to.equal(outputMessage);
+        done();
       });
 
       client2.write('What\'s up?');
