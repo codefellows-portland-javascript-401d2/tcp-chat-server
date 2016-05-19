@@ -4,8 +4,6 @@ const server = require('../server.js');
 
 const port = 8000;
 
-//TODO do I need to add additional testing for chat functions??
-
 describe('tcp chat server', () =>{
   before( done => {
     server.listen( port, done);
