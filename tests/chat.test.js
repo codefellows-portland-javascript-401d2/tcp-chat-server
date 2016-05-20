@@ -17,6 +17,7 @@ describe('superheroes tcp chat server', () => {
 
   let outputMessage;
   let client1;
+  let client2;
 
   describe('client 1', () => {
     before((done) => {
@@ -101,11 +102,13 @@ describe('superheroes tcp chat server', () => {
 
     after((done) => {
       client1.end();
-      client2.end(done);
+      client2.end();
+      done();
     });
   });
 
   after((done) => {
-    chatServer.close(done);
+    chatServer.close();
+    done();
   });
 });
