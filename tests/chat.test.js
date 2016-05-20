@@ -99,12 +99,6 @@ describe('superheroes tcp chat server', () => {
 
       done();
     });
-
-    // after((done) => {
-    //   client1.end();
-    //   client2.end();
-    //   done();
-    // });
   });
 
   after((done) => {
