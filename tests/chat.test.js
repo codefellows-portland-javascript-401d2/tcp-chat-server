@@ -68,16 +68,17 @@ describe('superheroes tcp chat server', () => {
       outputMessage = `\n${chat.allSockets[1].superhero} joined our team.\n\n` +
         `Welcome to Superheroes, ${chat.allSockets[1].superhero}!\n`;
 
-      client1.once('data', (inputMessage) => {
+      client1.on('data', (inputMessage) => {
         inputMessage = inputMessage.toString();
         expect(inputMessage).to.equal(outputMessage);
       });
 
       client2.once('data', (inputMessage) => {
-        inputMessage = inputMessage.toString();
+        inputMessage += inputMessage.toString();
         expect(inputMessage).to.equal(outputMessage);
-        done();
       });
+
+      done();
     });
 
     it('echos client 2\'s input to client 1\'s and 2\'s screens', (done) => {
@@ -91,10 +92,11 @@ describe('superheroes tcp chat server', () => {
       client2.once('data', (inputMessage) => {
         inputMessage = inputMessage.toString();
         expect(inputMessage).to.equal(outputMessage);
-        done();
       });
 
       client2.write('What\'s up?');
+
+      done();
     });
 
     after((done) => {
