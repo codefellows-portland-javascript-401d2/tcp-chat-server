@@ -68,7 +68,7 @@ describe('superheroes tcp chat server', () => {
       outputMessage = `\n${chat.allSockets[1].superhero} joined our team.\n\n` +
         `Welcome to Superheroes, ${chat.allSockets[1].superhero}!\n`;
 
-      client1.on('data', (inputMessage) => {
+      client1.once('data', (inputMessage) => {
         inputMessage = inputMessage.toString();
         expect(inputMessage).to.equal(outputMessage);
       });
