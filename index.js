@@ -1,4 +1,6 @@
 const chat = require('./chat');
-const portNumber = process.argv[2];
+const chatServer = chat.newServer();
 
-chat.createServer(portNumber);
+chatServer.listen(65000, () => {
+  console.log('Opened chat server for Superheroes on %j', chatServer.address());
+});

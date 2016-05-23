@@ -9,10 +9,10 @@ A chat server that manages connecting clients and enables broadcasting of messag
 3. Run `git checkout jluangphasy`
 4. Run `npm install`
 
-Default port number is `65000`. If you want to use a different port, replace `[port]` with whatever port you want.
+Default port number is `65000`.
 
-To run server: `node index.js` or `node index.js [port]`.
+To run server: `node index.js`.
 
-In a new terminal window, run `telnet localhost [port]` to connect a new client/user to the chat server.
+In a new terminal window, run `telnet localhost 65000` to connect a new client/user to the chat server.
 
 To run test: `npm run test`.

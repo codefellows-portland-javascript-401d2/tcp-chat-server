@@ -5,16 +5,14 @@ let chat = {};
 
 chat.allSockets = [];
 
-chat.broadcastSockets = function (socket, content) {
+chat.broadcastSockets = (socket, content) => {
   chat.allSockets.forEach((currentSocket) => {
-    if (currentSocket.superhero !== socket.superhero) {
-      currentSocket.write(content);
-    }
+    currentSocket.write(content);
   });
 };
 
-chat.createServer = function (portNumber = 65000) {
-  net.createServer((socket) => {
+chat.newServer = () => {
+  return net.createServer((socket) => {
     socket.superhero = superheroes.random();
 
     chat.allSockets.push(socket);
@@ -25,8 +23,6 @@ chat.createServer = function (portNumber = 65000) {
       let chunkStr = chunkData.toString().trim();
 
       chat.broadcastSockets(socket, `${socket.superhero}: ${chunkStr}\n`);
-
-      socket.write(`${socket.superhero}: `);
     });
 
     socket.on('close', () => {
@@ -34,9 +30,6 @@ chat.createServer = function (portNumber = 65000) {
     });
   }).on('error', (err) => {
     throw err;
-  }).listen(portNumber, () => {
-    process.stdout.write(`Superheroes at port ${portNumber} on localhost `
-      + `(http://localhost:${portNumber}).`);
   });
 };
 
