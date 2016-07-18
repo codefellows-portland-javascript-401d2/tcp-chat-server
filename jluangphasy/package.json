@@ -1,0 +1,29 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "A chat server that manages connecting clients and enables broadcasting of messages.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jluangphasy/tcp-chat-server.git"
+  },
+  "author": "Johnny Luangphasy (https://github.com/jluangphasy)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jluangphasy/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/jluangphasy/tcp-chat-server#readme",
+  "dependencies": {
+    "superheroes": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
