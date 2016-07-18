@@ -1,0 +1,26 @@
+{
+  "name": "tcp-chat-server",
+  "version": "1.0.0",
+  "description": "A TCP chat server assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run unit-test && npm run lint",
+    "unit-test": "mocha",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billyham/tcp-chat-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billyham/tcp-chat-server/issues"
+  },
+  "homepage": "https://github.com/billyham/tcp-chat-server#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.10.2",
+    "mocha": "^2.4.5"
+  }
+}
